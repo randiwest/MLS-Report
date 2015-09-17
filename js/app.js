@@ -29,7 +29,9 @@ function generateReport(header, rows) {
     //
     // process rows, create data to pass to templates
     //
-    
+    var header, rows;
+    var rows = [];
+    rows.push(rows);
 
 
     //
