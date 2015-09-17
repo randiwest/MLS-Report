@@ -8,6 +8,7 @@
 <link href="http://fonts.googleapis.com/css?family=Roboto:100,300" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/printstyle.css" media="print" >
 <script src="js/bootstrap.min.js"></script>
 
 
@@ -49,27 +50,78 @@
 <div id="report"></div>
 <script src="js/app.js"></script>
 
-<script id="heading" type="text/x-handlebars-template">
+<!-- Sales Table-->
+<script id="salesHeading" type="text/x-handlebars-template">
     <header class="row">
         <h1 class="center">{{title}}</h1>
     </header>
 </script>
-
-<script id="dump" type="text/x-handlebars-template">
-    <table class="row">
+<script id="salesDump" type="text/x-handlebars-template">
+    <table class="table">
         <thead>
             <tr>
-                {{#each header}}
-                <th>{{this}}</th>
-                {{/each}}
+                <th>ADDRESS</th>
+                <th>LIST PRICE</th>
+                <th>SALE PRICE</th>
+                <th>SALE DATE</th>
+                <th>AGE</th>
+                <th>DOM</th>
+                <th>BED</th>
+                <th>BATH</th>
+                <th>AREA</th>
+                <th>$PSF</th>
             </tr>
         </thead>
         <tbody>
             {{#each rows}}
             <tr>
-                {{#each this}}
-                <td>{{this}}</td>
-                {{/each}}
+                <td>{{Address}}</td>
+                <td>{{"List Price"}}</td>
+                <td>{{"Sold Price"}}</td>
+                <td>{{"Sold Date"}}</td>
+                <td>{{Age}}</td>
+                <td>{{"Days On Market"}}</td>
+                <td>{{"Tot BR"}}</td>
+                <td>{{"Tot Baths"}}</td>
+                <td>{{TotFlArea}}</td>
+                <td>{{"Sold Price per SqFt"}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</script>
+
+<!-- Listings Table-->
+<script id="listingsHeading" type="text/x-handlebars-template">
+    <header class="row">
+        <h1 class="center">{{title}}</h1>
+    </header>
+</script>
+<script id="listingsDump" type="text/x-handlebars-template">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ADDRESS</th>
+                <th>LIST PRICE</th>
+                <th>AGE</th>
+                <th>DOM</th>
+                <th>BED</th>
+                <th>BATH</th>
+                <th>AREA</th>
+                <th>$PSF</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each rows}}
+            <tr>
+                <td>{{Address}}</td>
+                <td>{{"List Price"}}</td>
+                <td>{{Age}}</td>
+                <td>{{"Days On Market"}}</td>
+                <td>{{"Tot BR"}}</td>
+                <td>{{"Tot Baths"}}</td>
+                <td>{{TotFlArea}}</td>
+                <td>{{"Sold Price per SqFt"}}</td>
             </tr>
             {{/each}}
         </tbody>
@@ -77,3 +129,4 @@
 </script>
 </body>
 </html>
+

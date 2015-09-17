@@ -16,7 +16,7 @@ $run.click(function() {
             console.debug('CSV', result);
             generateReport(result.meta.fields, result.data);
         }
-    })
+    });
 });
 
 function compileTemplate(tpl, vars) {
@@ -34,24 +34,25 @@ function generateReport(header, rows) {
         "totalListPrice": 0,
         "totalSalePrice": 0,
         "totalArea": 0
-   }
+   };
     var listings = {
         "rows": [],
         "totalListPrice": 0,
         "totalArea": 0
-   }
+   };
 
     console.log(rows);
    for( var row in rows) {
         if(rows[row].Status == "S") {
-            sold.rows.push(rows[row])
-            sold.totalListPrice = Number(rows[row]["List Price"].replace("$","").replace(",","")) + sold.totalListPrice
-            sold.totalSalePrice = Number(rows[row]["Sold Price"].replace("$","").replace(",","")) + sold.totalSalePrice
-            sold.totalArea = Number(rows[row]["TotFlArea"]) + sold.totalArea
+            sold.rows.push(rows[row]);
+            sold.totalListPrice = Number(rows[row]["List Price"].replace("$","").replace(",","")) + sold.totalListPrice;
+            sold.totalSalePrice = Number(rows[row]["Sold Price"].replace("$","").replace(",","")) + sold.totalSalePrice;
+            sold.totalArea = Number(rows[row].TotFlArea) + sold.totalArea;
         } else {
-            listings.rows.push(rows[row])
+            listings.rows.push(rows[row]);
            // listings.totalListPrice = Number(rows[row]["List Price"].replace("$","").replace(",","")) + listings.totalListPrice
-            listings.totalArea = Number(rows[row]["TotFlArea"]) + listings.totalArea
+            listings.totalArea = Number(rows[row].TotFlArea) + listings.totalArea;
+            listings.rows[row]["Sold Price per SqFt"] = Number(rows[row]["List Price"].replace("$","").replace(",","")) / Number(rows[row]["TotFlArea"]);
         }
     }
 
@@ -60,9 +61,9 @@ function generateReport(header, rows) {
     //
     // compile templates and append to report
     //
-    $report.append(compileTemplate('heading', { title: 'SALES' }));
-    $report.append(compileTemplate('dump', { header: header, rows: sold.rows}));
+    $report.append(compileTemplate('salesHeading', { title: 'SALES' }));
+    $report.append(compileTemplate('salesDump', { header: header, rows: sold.rows}));
 
-    $report.append(compileTemplate('heading', { title: 'LISTINGS' }));
-    $report.append(compileTemplate('dump', { header: header, rows: listings.rows }));
+    $report.append(compileTemplate('listingsHeading', { title: 'LISTINGS' }));
+    $report.append(compileTemplate('listingsDump', { header: header, rows: listings.rows }));
 }
