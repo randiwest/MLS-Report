@@ -5,31 +5,59 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.1.2/papaparse.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.2/handlebars.min.js"></script>
 
+<link href="http://fonts.googleapis.com/css?family=Roboto:100,300" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/bootstrap.min.js"></script>
+
+
     <style type="text/css">
     @media print {
         header { display: none; }
     }
     </style>
 </head>
-<body>
+<body class="container">
 
-<header>
+<!-- Old Button
+<header class="row">
     <input type="file" id="input-file" />
     <button id="run">Run</button>
 </header>
+-->
+<header class="row">
+    <h1>Polygon MLS Report Generator</h1>
+</header>
+
+<form>
+  <div class="form-group">
+    <label for="reportName">Report Name</label>
+    <input type="text" class="form-control" id="reportNameInput" placeholder="Name">
+  </div>
+  <div class="form-group">
+    <label for="reportAddress">Address</label>
+    <input type="text" class="form-control" id="reportAddressInput" placeholder="Address">
+  </div>
+  <div class="form-group">
+    <label for="inputFile">Upload File</label>
+    <input type="file" id="input-file">
+    <p class="help-block">Upload csv. file from MLS.</p>
+  </div>
+  <button type="submit" class="btn btn-default">Run</button>
+</form>
+
 
 <div id="report"></div>
-
-<script src="app.js"></script>
+<script src="js/app.js"></script>
 
 <script id="heading" type="text/x-handlebars-template">
-    <header>
-        <h1>{{title}}</h1>
+    <header class="row">
+        <h1 class="center">{{title}}</h1>
     </header>
 </script>
 
 <script id="dump" type="text/x-handlebars-template">
-    <table>
+    <table class="row">
         <thead>
             <tr>
                 {{#each header}}
