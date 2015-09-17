@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.1.2/papaparse.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.2/handlebars.min.js"></script>
+
+    <style type="text/css">
+    @media print {
+        header { display: none; }
+    }
+    </style>
+</head>
+<body>
+
+<header>
+    <input type="file" id="input-file" />
+    <button id="run">Run</button>
+</header>
+
+<div id="report"></div>
+
+<script src="app.js"></script>
+
+<script id="heading" type="text/x-handlebars-template">
+    <header>
+        <h1>{{title}}</h1>
+    </header>
+</script>
+
+<script id="dump" type="text/x-handlebars-template">
+    <table>
+        <thead>
+            <tr>
+                {{#each header}}
+                <th>{{this}}</th>
+                {{/each}}
+            </tr>
+        </thead>
+        <tbody>
+            {{#each rows}}
+            <tr>
+                {{#each this}}
+                <td>{{this}}</td>
+                {{/each}}
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</script>
+</body>
+</html>
