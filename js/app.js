@@ -1,6 +1,10 @@
 var $file = $('#input-file'),
     $run = $('#run'),
-    $report = $('#report');
+    $report = $('#report'),
+    reportName =  $('#reportNameInput').val(),
+    reportAddress =  $('#reportAddressInput').val(),
+    $reportHeader = $('#reportHeader');
+
 
 $run.click(function() {
     var file = $file[0].files[0];
@@ -19,6 +23,7 @@ $run.click(function() {
     });
 });
 
+
 function compileTemplate(tpl, vars) {
     return Handlebars.compile($('#' + tpl).html())(vars);
 }
@@ -33,12 +38,20 @@ function generateReport(header, rows) {
         "rows": [],
         "totalListPrice": 0,
         "totalSalePrice": 0,
-        "totalArea": 0
+        "totalArea": 0,
+        "averageListPrice": 0,
+        "averageSalePrice": 0,
+        "averageArea": 0,
+        "averagePSF":0
     };
     var listings = {
         "rows": [],
         "totalListPrice": 0,
-        "totalArea": 0
+        "totalArea": 0,
+        "averageListPrice": 0,
+        "averageSalePrice": 0,
+        "averageArea": 0,
+        "averagePSF":0
     };
 
     rows.forEach(function(row) {
@@ -81,6 +94,7 @@ function generateReport(header, rows) {
             sold.totalListPrice = rows[row]["List Price"] + sold.totalListPrice;
             sold.totalSalePrice = rows[row]["Sold Price"] + sold.totalSalePrice;
             sold.totalArea = rows[row].TotFlArea + sold.totalArea;
+            
         } else {
             listings.rows.push(rows[row]);
             listings.totalListPrice = rows[row]["List Price"] + listings.totalListPrice
@@ -88,9 +102,19 @@ function generateReport(header, rows) {
             rows[row]["Sold Price per SqFt"] = rows[row]["List Price"] / rows[row]["TotFlArea"];
         }
 
+        sold.averageListPrice = (sold.totalListPrice / sold.rows.length).formatMoney(0);
+        sold.averageSalePrice = (sold.totalSalePrice / sold.rows.length).formatMoney(0);
+        sold.averageArea = (sold.totalArea / sold.rows.length).formatMoney(0);
+        sold.averagePSF = (sold.totalSalePrice / sold.totalArea).formatMoney(0);
+
+        listings.averageListPrice = (listings.totalListPrice / listings.rows.length).formatMoney(0);
+        listings.averageArea = (listings.totalArea / listings.rows.length).formatMoney(0);
+        listings.averagePSF = (listings.totalListPrice / listings.totalArea).formatMoney(0);
+
         [ 'List Price', 'Sold Price', 'Sold Price per SqFt' ].forEach(function(column) {
-            rows[row][column] = rows[row][column].formatMoney(column == 'Sold Price per SqFt' ? 2 : 0);
+            rows[row][column] = rows[row][column].formatMoney(0);
         });
+
     }
 
     console.log(listings.rows);
@@ -99,10 +123,11 @@ function generateReport(header, rows) {
     // compile templates and append to report
     //
     $report.append(compileTemplate('salesHeading', { title: 'SALES' }));
-    $report.append(compileTemplate('salesDump', { header: header, rows: sold.rows}));
+    $report.append(compileTemplate('salesDump', { header: header, rows: sold.rows, totalListPrice: sold.totalListPrice.formatMoney(0) , totalSalePrice: sold.totalSalePrice.formatMoney(0), totalArea: sold.totalArea.formatMoney(0), averageListPrice: sold.averageListPrice, averageSalePrice: sold.averageSalePrice, averageArea: sold.averageArea, averagePSF: sold.averagePSF}));
 
     $report.append(compileTemplate('listingsHeading', { title: 'LISTINGS' }));
-    $report.append(compileTemplate('listingsDump', { header: header, rows: listings.rows }));
+    $report.append(compileTemplate('listingsDump', { header: header, rows: listings.rows, totalListPrice: listings.totalListPrice.formatMoney(0) , totalArea: listings.totalArea.formatMoney(0), averageListPrice: listings.averageListPrice, averageArea: listings.averageArea, averagePSF: listings.averagePSF }));
+    $reportHeader.append(compileTemplate('reportHeader',{reportName: reportName, reportAddress: reportAddress}));
 }
 
 Number.prototype.formatMoney = function(c, d, t){
@@ -116,7 +141,7 @@ var n = this,
    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
  };
 
-
+ 
 
 
 
