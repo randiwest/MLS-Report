@@ -4,13 +4,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.1.2/papaparse.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.2/handlebars.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 
-<link href="http://fonts.googleapis.com/css?family=Roboto:100,300" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/printstyle.css" media="print" >
-<script src="js/bootstrap.min.js"></script>
-
+    <link href="http://fonts.googleapis.com/css?family=Roboto:100,300" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/printstyle.css" media="print" >
 
     <style type="text/css">
     @media print {
@@ -76,18 +76,27 @@
             {{#each rows}}
             <tr>
                 <td>{{Address}}</td>
-                <td>{{"List Price"}}</td>
-                <td>{{"Sold Price"}}</td>
+                <td>${{"List Price"}}</td>
+                <td>${{"Sold Price"}}</td>
                 <td>{{"Sold Date"}}</td>
                 <td>{{Age}}</td>
                 <td>{{"Days On Market"}}</td>
                 <td>{{"Tot BR"}}</td>
                 <td>{{"Tot Baths"}}</td>
                 <td>{{TotFlArea}}</td>
-                <td>{{"Sold Price per SqFt"}}</td>
+                <td>${{"Sold Price per SqFt"}}</td>
             </tr>
             {{/each}}
         </tbody>
+        <tfoot>
+            <tr>
+                <td></td>
+                <td>{{averagelakdjflaks}}</td>
+            </tr>
+            <tr>
+                <td></td>
+            </tr>
+        </tfoot>
     </table>
 </script>
 
@@ -121,7 +130,7 @@
                 <td>{{"Tot BR"}}</td>
                 <td>{{"Tot Baths"}}</td>
                 <td>{{TotFlArea}}</td>
-                <td>{{"Sold Price per SqFt"}}</td>
+                <td>${{"Sold Price per SqFt"}}</td>
             </tr>
             {{/each}}
         </tbody>
