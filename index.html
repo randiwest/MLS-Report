@@ -118,6 +118,76 @@
     </table>
 </script>
 
+
+<!-- Summary -->
+<script id="summary" type="text/x-handlebars-template">
+    <h2>Summary</h2>
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <th>Summary</th>
+                <th class="text-center" colspan="2">Studio</th>
+                <th class="text-center" colspan="2">1 BR</th>
+                <th class="text-center" colspan="2">2 BR</th>
+                <th class="text-center" colspan="2">3 BR</th>
+                <th class="text-center" colspan="2">4 BR</th>
+                <th class="text-center" colspan="2">Total</th>
+            </tr>
+            <tr>
+                <th></th>
+                <th class="text-center">Avg $PSF</th>
+                <th class="text-center"># Sold</th>
+                <th class="text-center">Avg $PSF</th>
+                <th class="text-center"># Sold</th>
+                <th class="text-center">Avg $PSF</th>
+                <th class="text-center"># Sold</th>
+                <th class="text-center">Avg $PSF</th>
+                <th class="text-center"># Sold</th>
+                <th class="text-center">Avg $PSF</th>
+                <th class="text-center"># Sold</th>
+                <th class="text-center">Avg $PSF</th>
+                <th class="text-center"># Sold</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each summary}}
+            <tr>
+                <td>{{@key}}</td>
+                <td class="text-center">{{0.psf}}</td>
+                <td class="text-center">{{0.num_sold}}</td>
+                <td class="text-center">{{1.psf}}</td>
+                <td class="text-center">{{1.num_sold}}</td>
+                <td class="text-center">{{2.psf}}</td>
+                <td class="text-center">{{2.num_sold}}</td>
+                <td class="text-center">{{3.psf}}</td>
+                <td class="text-center">{{3.num_sold}}</td>
+                <td class="text-center">{{4.psf}}</td>
+                <td class="text-center">{{4.num_sold}}</td>
+                <td class="text-center">{{total.psf}}</td>
+                <td class="text-center">{{total.num_sold}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>Total</td>
+                <td class="text-center">{{summarytots.0.psf}}</td>
+                <td class="text-center">{{summarytots.0.num_sold}}</td>
+                <td class="text-center">{{summarytots.1.psf}}</td>
+                <td class="text-center">{{summarytots.1.num_sold}}</td>
+                <td class="text-center">{{summarytots.2.psf}}</td>
+                <td class="text-center">{{summarytots.2.num_sold}}</td>
+                <td class="text-center">{{summarytots.3.psf}}</td>
+                <td class="text-center">{{summarytots.3.num_sold}}</td>
+                <td class="text-center">{{summarytots.4.psf}}</td>
+                <td class="text-center">{{summarytots.4.num_sold}}</td>
+                <td class="text-center">{{summarytots.total.psf}}</td>
+                <td class="text-center">{{summarytots.total.num_sold}}</td>
+            </tr>
+        </tfoot>
+    </table>
+</script>
+
 <!-- Listings Table-->
 <script id="listingsHeading" type="text/x-handlebars-template">
     <div class="row">
@@ -176,12 +246,14 @@
         </tfoot>
     </table>
 </script>
-<script id="salesHeading" type="text/x-handlebars-template">
+<script id="reportHeading" type="text/x-handlebars-template">
 <div id="reportHeader">
     <h3>{{reportName}}</h3>
     <h4>{{reportAddress}}</h4>
 </div>
 </script>
+
+
 </body>
 </html>
 
