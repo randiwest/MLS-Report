@@ -1,9 +1,6 @@
 var $file = $('#input-file'),
     $run = $('#run'),
-    $report = $('#report'),
-    reportName =  $('#reportNameInput').val(),
-    reportAddress =  $('#reportAddressInput').val(),
-    $reportHeader = $('#reportHeader');
+    $report = $('#report');
 
 
 $run.click(function() {
@@ -31,6 +28,9 @@ function compileTemplate(tpl, vars) {
 function generateReport(header, rows) {
     $report.empty();
  
+    var reportName =  $('#reportNameInput').val(),
+    reportAddress =  $('#reportAddressInput').val(),
+    $reportHeader = $('#reportHeader');
     //
     // process rows, create data to pass to templates
     //
@@ -97,9 +97,9 @@ function generateReport(header, rows) {
             
         } else {
             listings.rows.push(rows[row]);
-            listings.totalListPrice = rows[row]["List Price"] + listings.totalListPrice
+            listings.totalListPrice = rows[row]["List Price"] + listings.totalListPrice;
             listings.totalArea = rows[row].TotFlArea + listings.totalArea;
-            rows[row]["Sold Price per SqFt"] = rows[row]["List Price"] / rows[row]["TotFlArea"];
+            rows[row]["Sold Price per SqFt"] = rows[row]["List Price"] / rows[row].TotFlArea;
         }
 
         sold.averageListPrice = (sold.totalListPrice / sold.rows.length).formatMoney(0);

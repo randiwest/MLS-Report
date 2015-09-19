@@ -50,11 +50,6 @@
 <div id="report"></div>
 <script src="js/app.js"></script>
 
-<div id="reportHeader">
-    <h3>{{reportName}}</h3>
-    <h4>{{reportAddress}}</h4>
-</div>
-
 
 <!-- Sales Table-->
 <script id="salesHeading" type="text/x-handlebars-template">
@@ -63,7 +58,7 @@
     </div>
 </script>
 <script id="salesDump" type="text/x-handlebars-template">
-    <table class="table">
+    <table class="table table-condensed">
         <thead>
             <tr>
                 <th>ADDRESS</th>
@@ -130,7 +125,7 @@
     </div>
 </script>
 <script id="listingsDump" type="text/x-handlebars-template">
-    <table class="table">
+    <table class="table table-condensed">
         <thead>
             <tr>
                 <th>ADDRESS</th>
@@ -180,6 +175,12 @@
             </tr>
         </tfoot>
     </table>
+</script>
+<script id="salesHeading" type="text/x-handlebars-template">
+<div id="reportHeader">
+    <h3>{{reportName}}</h3>
+    <h4>{{reportAddress}}</h4>
+</div>
 </script>
 </body>
 </html>
