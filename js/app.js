@@ -32,6 +32,7 @@ function generateReport(header, rows) {
  
     var reportName =  $('#reportNameInput').val(),
         reportAddress =  $('#reportAddressInput').val(),
+        reportDateRange = $('#reportDateRangeInput').val(),
         $reportHeader = $('#reportHeader');
 
     //
@@ -195,7 +196,8 @@ function generateReport(header, rows) {
     //
     // compile templates and append to report
     //
-    $report.append(compileTemplate('reportHeading',{ reportName: reportName, reportAddress: reportAddress }));
+    $report.append(compileTemplate('reportHeading',{ 
+        reportName: reportName, reportAddress: reportAddress, reportDateRange: reportDateRange}));
 
     $report.append(compileTemplate('salesHeading', { title: 'SALES' }));
     $report.append(compileTemplate('salesDump', { 

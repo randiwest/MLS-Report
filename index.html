@@ -20,29 +20,27 @@
 </head>
 <body class="container">
 
-<!-- Old Button
-<header class="row">
-    <input type="file" id="input-file" />
-    <button id="run">Run</button>
-</header>
--->
 <header class="row">
     <h1>Polygon MLS Report Generator</h1>
     <form>
-      <div class="form-group">
-        <label for="reportName">Report Name</label>
-        <input type="text" class="form-control" id="reportNameInput" placeholder="Name">
-      </div>
-      <div class="form-group">
-        <label for="reportAddress">Address</label>
-        <input type="text" class="form-control" id="reportAddressInput" placeholder="Address">
-      </div>
-      <div class="form-group">
-        <label for="inputFile">Upload File</label>
-        <input type="file" id="input-file">
-        <p class="help-block">Upload csv. file from MLS.</p>
-      </div>
-      <button type="button" class="btn btn-default" id="run">Run</button>
+        <div class="form-group">
+            <label for="reportName">Report Name</label>
+            <input type="text" class="form-control" id="reportNameInput" placeholder="Name">
+        </div>
+        <div class="form-group">
+            <label for="reportAddress">Address</label>
+            <input type="text" class="form-control" id="reportAddressInput" placeholder="Address">
+        </div>
+        <div class="form-group">
+            <label for="reportDateRange">Date Range Description</label>
+            <input type="text" class="form-control" id="reportDateRangeInput" placeholder="i.e. Sales from January 1, 2015">
+        </div>
+        <div class="form-group">
+            <label for="inputFile">Upload File</label>
+            <input type="file" id="input-file">
+            <p class="help-block">Upload csv. file from MLS.</p>
+        </div>
+        <button type="button" class="btn btn-default" id="run">Run</button>
     </form>
 </header>
 
@@ -53,66 +51,66 @@
 
 <!-- Sales Table-->
 <script id="salesHeading" type="text/x-handlebars-template">
-    <div class="row">
-        <h5 class="center">{{title}}</h5>
+    <div>
+        <h3 class="center">{{title}}</h3>
     </div>
 </script>
 <script id="salesDump" type="text/x-handlebars-template">
     <table class="table table-condensed">
         <thead>
             <tr>
-                <th>ADDRESS</th>
-                <th>LIST PRICE</th>
-                <th>SALE PRICE</th>
-                <th>SALE DATE</th>
-                <th>AGE</th>
-                <th>DOM</th>
-                <th>BED</th>
-                <th>BATH</th>
-                <th>AREA</th>
-                <th>$PSF</th>
+                <th class="text-left">ADDRESS</th>
+                <th class="text-right">LIST PRICE</th>
+                <th class="text-right">SALE PRICE</th>
+                <th class="text-center">SALE DATE</th>
+                <th class="text-center">AGE</th>
+                <th class="text-center">DOM</th>
+                <th class="text-center">BED</th>
+                <th class="text-center">BATH</th>
+                <th class="text-right">AREA</th>
+                <th class="text-right">$PSF</th>
             </tr>
         </thead>
         <tbody>
             {{#each rows}}
             <tr>
-                <td>{{Address}}</td>
-                <td>${{"List Price"}}</td>
-                <td>${{"Sold Price"}}</td>
-                <td>{{"Sold Date"}}</td>
-                <td>{{Age}}</td>
-                <td>{{"Days On Market"}}</td>
-                <td>{{"Tot BR"}}</td>
-                <td>{{"Tot Baths"}}</td>
-                <td>{{TotFlArea}}</td>
-                <td>${{"Sold Price per SqFt"}}</td>
+                <td class="text-left">{{Address}}</td>
+                <td class="text-right">${{"List Price"}}</td>
+                <td class="text-right">${{"Sold Price"}}</td>
+                <td class="text-center">{{"Sold Date"}}</td>
+                <td class="text-center">{{Age}}</td>
+                <td class="text-center">{{"Days On Market"}}</td>
+                <td class="text-center">{{"Tot BR"}}</td>
+                <td class="text-center">{{"Tot Baths"}}</td>
+                <td class="text-right">{{TotFlArea}}</td>
+                <td class="text-right">${{"Sold Price per SqFt"}}</td>
             </tr>
             {{/each}}
         </tbody>
         <tfoot>
             <tr>
                 <td>TOTAL</td>
-                <td>${{totalListPrice}}</td>
-                <td>${{totalSalePrice}}</td>
+                <td class="text-right">${{totalListPrice}}</td>
+                <td class="text-right">${{totalSalePrice}}</td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td>{{totalArea}}</td>
+                <td class="text-right">{{totalArea}}</td>
                 <td></td>
             </tr>
             <tr>
                 <td>AVERAGE</td>
-                <td>${{averageListPrice}}</td>
-                <td>${{averageSalePrice}}</td>
+                <td class="text-right">${{averageListPrice}}</td>
+                <td class="text-right">${{averageSalePrice}}</td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td>{{averageArea}}</td>
-                <td>${{averagePSF}}</td>
+                <td class="text-right">{{averageArea}}</td>
+                <td class="text-right">${{averagePSF}}</td>
             </tr>
         </tfoot>
     </table>
@@ -121,11 +119,11 @@
 
 <!-- Summary -->
 <script id="summary" type="text/x-handlebars-template">
-    <h2>Summary</h2>
+    <h3>SUMMARY</h3>
     <table class="table table-condensed">
         <thead>
             <tr>
-                <th>Summary</th>
+                <th></th>
                 <th class="text-center" colspan="2">Studio</th>
                 <th class="text-center" colspan="2">1 BR</th>
                 <th class="text-center" colspan="2">2 BR</th>
@@ -190,66 +188,68 @@
 
 <!-- Listings Table-->
 <script id="listingsHeading" type="text/x-handlebars-template">
-    <div class="row">
-        <h5 class="center">{{title}}</h5>
+    <div>
+        <h3 class="center">{{title}}</h3>
     </div>
 </script>
 <script id="listingsDump" type="text/x-handlebars-template">
     <table class="table table-condensed">
         <thead>
             <tr>
-                <th>ADDRESS</th>
-                <th>LIST PRICE</th>
-                <th>AGE</th>
-                <th>DOM</th>
-                <th>BED</th>
-                <th>BATH</th>
-                <th>AREA</th>
-                <th>$PSF</th>
+                <th class="text-left">ADDRESS</th>
+                <th class="text-right">LIST PRICE</th>
+                <th class="text-center">AGE</th>
+                <th class="text-center">DOM</th>
+                <th class="text-center">BED</th>
+                <th class="text-center">BATH</th>
+                <th class="text-right">AREA</th>
+                <th class="text-right">$PSF</th>
             </tr>
         </thead>
         <tbody>
             {{#each rows}}
             <tr>
-                <td>{{Address}}</td>
-                <td>{{"List Price"}}</td>
-                <td>{{Age}}</td>
-                <td>{{"Days On Market"}}</td>
-                <td>{{"Tot BR"}}</td>
-                <td>{{"Tot Baths"}}</td>
-                <td>{{TotFlArea}}</td>
-                <td>${{"Sold Price per SqFt"}}</td>
+                <td class="text-left">{{Address}}</td>
+                <td class="text-right">{{"List Price"}}</td>
+                <td class="text-center">{{Age}}</td>
+                <td class="text-center">{{"Days On Market"}}</td>
+                <td class="text-center">{{"Tot BR"}}</td>
+                <td class="text-center">{{"Tot Baths"}}</td>
+                <td class="text-right">{{TotFlArea}}</td>
+                <td class="text-right">${{"Sold Price per SqFt"}}</td>
             </tr>
             {{/each}}
         </tbody>
         <tfoot>
             <tr>
+                <td></td>
                 <td>TOTAL</td>
-                <td>${{totalListPrice}}</td>
+                <td class="text-right">${{totalListPrice}}</td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td>{{totalArea}}</td>
+                <td class="text-right">{{totalArea}}</td>
                 <td></td>
             </tr>
             <tr>
                 <td>AVERAGE</td>
-                <td>${{averageListPrice}}</td>
+                <td class="text-right">${{averageListPrice}}</td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td>{{averageArea}}</td>
-                <td>${{averagePSF}}</td>
+                <td class="text-right">{{averageArea}}</td>
+                <td class="text-right">${{averagePSF}}</td>
             </tr>
         </tfoot>
     </table>
 </script>
 <script id="reportHeading" type="text/x-handlebars-template">
 <div id="reportHeader">
-    <h3>{{reportName}}</h3>
+    <h3><u><b>{{reportName}}</u></b></h3>
     <h4>{{reportAddress}}</h4>
+    <h4>{{reportDateRange}}</h4>
 </div>
 </script>
 
