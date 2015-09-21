@@ -186,13 +186,13 @@ function generateReport(header, rows) {
     for (var month in summary) {
         for (var nbr in summary[month]) {
             var br = summary[month][nbr];
-            br.psf = (br.price / br.area).formatMoney(0);
+            br.psf = "$" + (br.price / br.area).formatMoney(0);
         }
     }
 
     for (var nbr in summarytots) {
         var br = summarytots[nbr];
-        br.psf = (br.price / br.area).formatMoney(0);
+        br.psf = "$" + (br.price / br.area).formatMoney(0);
     }
 
     console.log(listings.rows, summarytots);
