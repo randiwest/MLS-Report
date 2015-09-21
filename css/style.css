@@ -8,3 +8,17 @@ body {
 tfoot {
 	font-weight: bold;
 }
+.minimize {
+	margin: 2px;
+}
+table tr td{
+	height: 17px !important;
+	padding:0px !important;
+}
+h3 {
+	margin-top: 5px;
+	margin-bottom: 3px;
+}
+hr {
+	margin: 10px;
+}

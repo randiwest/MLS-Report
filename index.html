@@ -222,7 +222,6 @@
         </tbody>
         <tfoot>
             <tr>
-                <td></td>
                 <td>TOTAL</td>
                 <td class="text-right">${{totalListPrice}}</td>
                 <td></td>
@@ -248,8 +247,9 @@
 <script id="reportHeading" type="text/x-handlebars-template">
 <div id="reportHeader">
     <h3><u><b>{{reportName}}</u></b></h3>
-    <h4>{{reportAddress}}</h4>
-    <h4>{{reportDateRange}}</h4>
+    <h4 class="minimize"> {{reportAddress}}</h4>
+    <h4 class="minimize"> {{reportDateRange}}</h4>
+    <hr>
 </div>
 </script>
 
