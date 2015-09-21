@@ -46,7 +46,8 @@ function generateReport(header, rows) {
         "averageListPrice": 0,
         "averageSalePrice": 0,
         "averageArea": 0,
-        "averagePSF":0
+        "averagePSF":0,
+        "count":0
     };
     var listings = {
         "rows": [],
@@ -55,7 +56,8 @@ function generateReport(header, rows) {
         "averageListPrice": 0,
         "averageSalePrice": 0,
         "averageArea": 0,
-        "averagePSF":0
+        "averagePSF":0,
+        "count":0
     };
     var summary = {}, 
         summarytots = { 
@@ -169,10 +171,12 @@ function generateReport(header, rows) {
         sold.averageSalePrice = (sold.totalSalePrice / sold.rows.length).formatMoney(0);
         sold.averageArea = (sold.totalArea / sold.rows.length).formatMoney(0);
         sold.averagePSF = (sold.totalSalePrice / sold.totalArea).formatMoney(0);
+        sold.count = sold.rows.length;
 
         listings.averageListPrice = (listings.totalListPrice / listings.rows.length).formatMoney(0);
         listings.averageArea = (listings.totalArea / listings.rows.length).formatMoney(0);
         listings.averagePSF = (listings.totalListPrice / listings.totalArea).formatMoney(0);
+        listings.count = listings.rows.length;
 
         [ 'List Price', 'Sold Price', 'Sold Price per SqFt' ].forEach(function(column) {
             rows[row][column] = rows[row][column].formatMoney(0);
@@ -199,7 +203,7 @@ function generateReport(header, rows) {
     $report.append(compileTemplate('reportHeading',{ 
         reportName: reportName, reportAddress: reportAddress, reportDateRange: reportDateRange}));
 
-    $report.append(compileTemplate('salesHeading', { title: 'SALES' }));
+    $report.append(compileTemplate('salesHeading', { title: 'SALES', count: sold.count }));
     $report.append(compileTemplate('salesDump', { 
         header: header, rows: sold.rows, totalListPrice: sold.totalListPrice.formatMoney(0), 
         totalSalePrice: sold.totalSalePrice.formatMoney(0), totalArea: sold.totalArea.formatMoney(0), 
@@ -207,7 +211,7 @@ function generateReport(header, rows) {
         averageArea: sold.averageArea, averagePSF: sold.averagePSF
     }));
 
-    $report.append(compileTemplate('listingsHeading', { title: 'LISTINGS' }));
+    $report.append(compileTemplate('listingsHeading', { title: 'LISTINGS' , count: listings.count}));
     $report.append(compileTemplate('listingsDump', {
         header: header, rows: listings.rows, totalListPrice: listings.totalListPrice.formatMoney(0), 
         totalArea: listings.totalArea.formatMoney(0), averageListPrice: listings.averageListPrice, 

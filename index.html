@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>Polygon MLS Report Generator</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.1.2/papaparse.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.2/handlebars.min.js"></script>
@@ -40,7 +41,7 @@
             <input type="file" id="input-file">
             <p class="help-block">Upload csv. file from MLS.</p>
         </div>
-        <button type="button" class="btn btn-default" id="run">Run</button>
+        <button type="button" class="btn btn-primary btn-lg active" id="run">Run</button>
     </form>
 </header>
 
@@ -52,7 +53,7 @@
 <!-- Sales Table-->
 <script id="salesHeading" type="text/x-handlebars-template">
     <div>
-        <h3 class="center">{{title}}</h3>
+        <h3 class="center">{{title}} ({{count}})</h3>
     </div>
 </script>
 <script id="salesDump" type="text/x-handlebars-template">
@@ -189,7 +190,7 @@
 <!-- Listings Table-->
 <script id="listingsHeading" type="text/x-handlebars-template">
     <div>
-        <h3 class="center">{{title}}</h3>
+        <h3 class="center">{{title}} ({{count}})</h3>
     </div>
 </script>
 <script id="listingsDump" type="text/x-handlebars-template">
